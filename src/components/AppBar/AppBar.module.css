@@ -23,6 +23,7 @@
     font-size: 18px;
     font-weight: 800;
     margin-right: 72px;
+    color: #434455;
 }
 .firstLogoWord {
     color: #4D5AE5;
@@ -31,4 +32,7 @@
     text-decoration: none;
     color:#434455;
     font-size: 18px;
+}
+.logoLink {
+    text-decoration: none;
 }
