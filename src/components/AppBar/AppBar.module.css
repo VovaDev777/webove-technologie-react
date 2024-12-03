@@ -1,0 +1,34 @@
+.header {
+    padding: 25.5px 156px;
+}
+.container {
+    display: flex;
+    align-items: center;
+}
+.navigationCon {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    gap: 40px;
+}
+/* .registrationCon {
+    display: flex;
+} */
+.registrationList {
+    display: flex;
+    gap: 40px;
+}
+.logo {
+    font-family: Raleway;
+    font-size: 18px;
+    font-weight: 800;
+    margin-right: 72px;
+}
+.firstLogoWord {
+    color: #4D5AE5;
+}
+.links {
+    text-decoration: none;
+    color:#434455;
+    font-size: 18px;
+}
