@@ -43,16 +43,42 @@ const HomePage = () => {
         <h2 className={css.doingTitle}>What are we doing</h2>
         <ul className={css.doingList}>
           <li className={css.doingItem}>
-            <img className={css.doingImg} src="" alt="" />
+            <img className={css.doingImg} src="../../../public/images/doing1.jpg" alt="Our offer" />
           </li>
           <li className={css.doingItem}>
-            <img className={css.doingImg} src="" alt="" />
+            <img className={css.doingImg} src="../../../public/images/doing2.jpg" alt="Our offer" />
           </li>
           <li className={css.doingItem}>
-            <img className={css.doingImg} src="" alt="" />
+            <img className={css.doingImg} src="../../../public/images/doing3.jpg" alt="Our offer" />
           </li>
         </ul>
       </section>
+      <section className={css.teamCon}>
+        <h2 className={css.teamTitle}>Our Team</h2>
+        <ul className={css.teamList}>
+          <li className={css.teamListItem}>
+            <img className={css.teamImg} src="../../../public/images/team1.jpg" alt="Our team" />
+            <h4 className={css.teamMemberName}>Mark Guerrero</h4>
+            <p className={css.teamMemberRole}>Product Designer</p>
+          </li>
+          <li className={css.teamListItem}>
+            <img className={css.teamImg} src="../../../public/images/team2.jpg" alt="Our team" />
+            <h4 className={css.teamMemberName}>Tom Ford</h4>
+            <p className={css.teamMemberRole}>Frontend Developer</p>
+          </li>
+          <li className={css.teamListItem}>
+            <img className={css.teamImg} src="../../../public/images/team3.jpg" alt="Our team" />
+            <h4 className={css.teamMemberName}>Camila Garcia</h4>
+            <p className={css.teamMemberRole}>Marketing</p>
+          </li>
+          <li className={css.teamListItem}>
+            <img className={css.teamImg} src="../../../public/images/team4.jpg" alt="Our team" />
+            <h4 className={css.teamMemberName}>Daniel Wilson</h4>
+            <p className={css.teamMemberRole}>UI Designer</p>
+          </li>
+        </ul>
+      </section>
+      
     </>
   );
 };
