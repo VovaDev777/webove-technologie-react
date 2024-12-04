@@ -1,38 +1,49 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
 export default [
-  { ignores: ['dist'] },
+  // Игнорируем папку dist
+  {
+    ignores: ['dist'],
+  },
+  // Настройка для JavaScript и JSX файлов
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+      ecmaVersion: 2020, // Используем версию ES2020
+      globals: {
+        ...globals.browser, // Глобальные переменные браузера
+        ...globals.node, // Глобальные переменные Node.js
+      },
       parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
-        sourceType: 'module',
+        ecmaVersion: 'latest', // Последняя версия ECMAScript
+        ecmaFeatures: { jsx: true }, // Включаем поддержку JSX
+        sourceType: 'module', // Модули ES6
       },
     },
-    settings: { react: { version: '18.3' } },
+    settings: {
+      react: {
+        version: 'detect', // Автоматически определять версию React
+      },
+    },
     plugins: {
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
     rules: {
-      ...js.configs.recommended.rules,
-      ...react.configs.recommended.rules,
-      ...react.configs['jsx-runtime'].rules,
-      ...reactHooks.configs.recommended.rules,
-      'react/jsx-no-target-blank': 'off',
+      ...js.configs.recommended.rules, // Рекомендуемые правила ESLint
+      ...react.configs.recommended.rules, // Рекомендуемые правила React
+      ...react.configs['jsx-runtime'].rules, // Поддержка React 17+
+      ...reactHooks.configs.recommended.rules, // Правила хуков React
+      'react/jsx-no-target-blank': 'off', // Отключаем проверку target="_blank"
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
     },
   },
-]
+];
