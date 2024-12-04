@@ -1,8 +1,8 @@
-import React from 'react'
+import css from './PortfolioPage.module.css'
 
 const PortfolioPage = () => {
   return (
-    <div>PortfolioPage</div>
+    
   )
 }
 
