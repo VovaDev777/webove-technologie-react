@@ -24,6 +24,11 @@
   font-size: 16px;
   font-weight: 500;
 }
+.heroBtn:hover,
+.heroBtn:focus {
+    background-color:  #404BBF;
+    cursor: pointer;
+}
 .skillsList {
   display: flex;
   gap: 24px;
