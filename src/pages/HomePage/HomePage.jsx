@@ -1,4 +1,5 @@
 import css from "./HomePage.module.css";
+import Footer from "../../components/Footer/Footer";
 
 const HomePage = () => {
   return (
@@ -78,7 +79,7 @@ const HomePage = () => {
           </li>
         </ul>
       </section>
-      
+      <Footer />
     </>
   );
 };
