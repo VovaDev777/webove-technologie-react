@@ -1,14 +1,20 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import { useAuth } from '../../components/AuthContext/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
+
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const { login } = useAuth(); // Доступ к функции login
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,12 +26,9 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setError('');
     setSuccess('');
-
-    console.log('Sending login request with data:', formData);
-
+  
     try {
       const response = await fetch('http://localhost:5000/api/login/login', {
         method: 'POST',
@@ -37,25 +40,31 @@ const LoginPage = () => {
           Password: formData.password,
         }),
       });
-
-      console.log('Response status:', response.status);
-
+  
       if (!response.ok) {
         const errorData = await response.json();
-        console.error('Error response:', errorData);
         setError(errorData.error || 'Invalid email or password.');
         return;
       }
-
+  
       const data = await response.json();
-      console.log('Successful login:', data);
-
+      console.log('[CLIENT] Login successful:', data);
+  
+      // Устанавливаем флаг авторизации
+      localStorage.setItem('isAuthenticated', 'true');
+  
+      // Триггерим событие, чтобы AppBar обновился
+      window.dispatchEvent(new Event('storage'));
+  
       setSuccess(data.message);
+      navigate('/'); // Перенаправляем пользователя после успешного логина
     } catch (error) {
-      console.error('Failed to connect to the server:', error);
+      console.error('[CLIENT] Failed to connect to the server:', error);
       setError('Failed to connect to the server.');
     }
   };
+  
+  
   return (
     <StyledWrapper>
       <form className="form">

@@ -1,6 +1,32 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
+import Popup from '../../components/Popup';
+import { useNavigate } from 'react-router-dom';
+const countries = [
+  'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia',
+  'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium',
+  'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria',
+  'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic', 'Chad',
+  'Chile', 'China', 'Colombia', 'Comoros', 'Congo (Congo-Brazzaville)', 'Costa Rica', 'Croatia', 'Cuba',
+  'Cyprus', 'Czechia (Czech Republic)', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador',
+  'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini (fmr. Swaziland)', 'Ethiopia',
+  'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada',
+  'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Holy See', 'Honduras', 'Hungary', 'Iceland', 'India',
+  'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya',
+  'Kiribati', 'Korea (North)', 'Korea (South)', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon',
+  'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia',
+  'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova',
+  'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar (formerly Burma)', 'Namibia', 'Nauru',
+  'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Macedonia', 'Norway', 'Oman',
+  'Pakistan', 'Palau', 'Palestine State', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland',
+  'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia',
+  'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal',
+  'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia',
+  'South Africa', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria',
+  'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey',
+  'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America',
+  'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'
+];
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -15,6 +41,8 @@ const RegisterPage = () => {
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [popup, setPopup] = useState({ message: '', type: '' });
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,67 +54,32 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Проверка совпадения паролей
-    if (formData.password !== formData.confirmPassword) {
-      console.error('Validation failed: Passwords do not match'); // Лог ошибки
-      setError('Passwords do not match');
-      return;
-    }
-
-    setError('');
-    setSuccess('');
-
-    console.log('Sending request to /api/people/add with data:', formData); // Лог отправляемых данных
-
     try {
       const response = await fetch('http://localhost:5000/api/people/add', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          Name: formData.name,
-          YearOfBirth: formData.yearOfBirth,
-          Country: formData.country,
-          Email: formData.email,
-          Password: formData.password,
-          Phone: formData.phone,
-          Notes: formData.notes,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
-
-      console.log('Response status:', response.status); // Лог статуса ответа
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Error response:', errorData); // Лог ошибок с сервера
-        setError(errorData.error || 'Something went wrong.');
-        return;
-      }
-
       const data = await response.json();
-      console.log('Successful response:', data); // Лог успешного ответа
-
-      setSuccess(data.message);
-      setFormData({
-        name: '',
-        yearOfBirth: '',
-        country: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        phone: '',
-        notes: '',
-      });
+      if (!response.ok) throw new Error(data.error || 'Registration failed');
+      setPopup({ message: 'Registration successful!', type: 'success' });
+      setTimeout(() => {
+        navigate('/login'); // Переход на страницу логина
+      }, 3000); // Задержка в 3 секунды перед редиректом
     } catch (error) {
-      console.error('Failed to connect to the server:', error); // Лог ошибки подключения
-      setError('Failed to connect to the server.');
+      setPopup({ message: error.message, type: 'error' });
     }
   };
 
   return (
     <StyledWrapper>
+      {popup.message && (
+        <Popup
+          message={popup.message}
+          type={popup.type}
+          onClose={() => setPopup({ message: '', type: '' })}
+        />
+      )}
       <form className="form" onSubmit={handleSubmit}>
         <div className="flex-column">
           <label>Name</label>
@@ -121,19 +114,25 @@ const RegisterPage = () => {
         </div>
 
         <div className="flex-column">
-          <label>Country</label>
-        </div>
-        <div className="inputForm">
-          <input
-            type="text"
-            name="country"
-            className="input"
-            placeholder="Enter your Country"
-            value={formData.country}
-            onChange={handleChange}
-            required
-          />
-        </div>
+  <label>Country</label>
+</div>
+<div className="inputForm">
+  <input
+    type="text"
+    list="countries"
+    name="country"
+    className="input"
+    placeholder="Start typing or select a country"
+    value={formData.country}
+    onChange={handleChange}
+    required
+  />
+  <datalist id="countries">
+    {countries.map((country) => (
+      <option key={country} value={country} />
+    ))}
+  </datalist>
+</div>
 
         <div className="flex-column">
           <label>Email</label>
@@ -237,23 +236,9 @@ const StyledWrapper = styled.div`
     font-weight: 600;
   }
 
-  .inputForm {
-    border: 1.5px solid #ecedec;
-    border-radius: 10px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    transition: 0.2s ease-in-out;
-  }
+ 
 
-  .input {
-    margin-left: 10px;
-    border-radius: 10px;
-    border: none;
-    width: 100%;
-    height: 100%;
-  }
+
 
   .input:focus {
     outline: none;
@@ -297,6 +282,32 @@ const StyledWrapper = styled.div`
     font-size: 14px;
     border-radius: 10px;
   }
+    .inputForm {
+  position: relative; /* Нужно для правильного позиционирования */
+  border: 1.5px solid #ecedec;
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.input {
+  margin-left: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Input должен быть выше datalist */
+}
+
+
+
+.inputForm:focus-within {
+  border-color: #2d79f3;
+}
+
 `;
 
 export default RegisterPage;

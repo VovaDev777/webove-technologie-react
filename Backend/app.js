@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import peopleRoutes from './routes/people.js';
 import loginRoutes from './routes/login.js';
+import authRoutes from './routes/status.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
@@ -10,11 +12,18 @@ const app = express();
 app.use(bodyParser.json());
 
 // Разрешить CORS
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:5173', // Укажите точный адрес фронтенда
+    credentials: true, // Разрешить передачу cookie
+  })
+);
+app.use(cookieParser()); 
 
 // Роуты
 app.use('/api/people', peopleRoutes);
 app.use('/api/login', loginRoutes);
+app.use('/api/auth', authRoutes);
 
 // Запуск сервера
 const PORT = process.env.PORT || 5000;
