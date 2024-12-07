@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Popup from '../../components/Popup';
 import { useNavigate } from 'react-router-dom';
+import css from './RegisterPage.module.css'
 const countries = [
   'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia',
   'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium',
@@ -55,7 +56,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/people/add', {
+      const response = await fetch('http://localhost:5001/api/people/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -80,6 +81,7 @@ const RegisterPage = () => {
           onClose={() => setPopup({ message: '', type: '' })}
         />
       )}
+      
       <form className="form" onSubmit={handleSubmit}>
         <div className="flex-column">
           <label>Name</label>
@@ -204,7 +206,6 @@ const RegisterPage = () => {
             value={formData.notes}
             onChange={handleChange}
             rows="3"
-            style={{ resize: 'none', height: '60px' }}
           />
         </div>
 
@@ -220,9 +221,15 @@ const RegisterPage = () => {
 };
 
 const StyledWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
   .form {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
     gap: 10px;
     background-color: #ffffff;
     padding: 30px;
@@ -236,16 +243,42 @@ const StyledWrapper = styled.div`
     font-weight: 600;
   }
 
- 
-
-
-
-  .input:focus {
-    outline: none;
+  .inputForm {
+    position: relative;
+    border: 1.5px solid #ecedec; /* Default border color */
+    border-radius: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
 
   .inputForm:focus-within {
-    border: 1.5px solid #2d79f3;
+    border-color: #2d79f3; /* Highlighted border color */
+    box-shadow: 0 0 4px rgba(45, 121, 243, 0.4); /* Subtle blue shadow */
+  }
+
+  .input {
+    margin-left: 10px;
+    border-radius: 10px;
+    border: none; /* Remove default input border */
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none; /* Prevent focus outline */
+    color: #151717;
+  }
+
+  .input::placeholder {
+    color: #a8a8a8; /* Placeholder color */
+    font-size: 14px;
+  }
+
+  .input:focus {
+    outline: none; /* Prevent double outline */
   }
 
   .button-submit {
@@ -278,36 +311,12 @@ const StyledWrapper = styled.div`
   }
 
   textarea.input {
-    padding: 10px;
     font-size: 14px;
     border-radius: 10px;
+    resize: none;
   }
-    .inputForm {
-  position: relative; /* Нужно для правильного позиционирования */
-  border: 1.5px solid #ecedec;
-  border-radius: 10px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-  transition: 0.2s ease-in-out;
-}
-
-.input {
-  margin-left: 10px;
-  border-radius: 10px;
-  border: none;
-  width: 100%;
-  height: 100%;
-  z-index: 1; /* Input должен быть выше datalist */
-}
-
-
-
-.inputForm:focus-within {
-  border-color: #2d79f3;
-}
-
 `;
+
+
 
 export default RegisterPage;

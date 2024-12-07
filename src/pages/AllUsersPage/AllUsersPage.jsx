@@ -30,7 +30,7 @@ const AllUsersPage = () => {
         sortOrder: sort.order,
       });
 
-      const response = await fetch(`http://localhost:5000/api/people/all?${queryParams.toString()}`);
+      const response = await fetch(`http://localhost:5001/api/people/all?${queryParams.toString()}`);
       if (!response.ok) {
         throw new Error('Failed to fetch users.');
       }
@@ -56,7 +56,7 @@ const AllUsersPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/people/${id}`, {
+      const response = await fetch(`http://localhost:5001/api/people/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {

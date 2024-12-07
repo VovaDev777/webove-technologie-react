@@ -39,3 +39,7 @@
 .logoLink {
   text-decoration: none;
 }
+.authBtn {
+  display: flex;
+  gap: 40px;
+}

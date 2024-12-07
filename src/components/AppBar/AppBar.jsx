@@ -42,19 +42,20 @@ const AppBar = () => {
           </NavLink>
           <NavLink to='/' className={css.links}>Home</NavLink>
           <NavLink to='/portfolio' className={css.links}>Portfolio</NavLink>
-          <NavLink to='/summary' className={css.links}>Summary</NavLink>
+          </div>
+          {/* <NavLink to='/summary' className={css.links}>Summary</NavLink> */}
           {isAuthenticated ? (
-            <>
+            <div className={css.authBtn}> 
               <NavLink to='/allUsers' className={css.links}>All users</NavLink>
               <button onClick={logout} className={css.links}>Logout</button>
-            </>
+            </div>
           ) : (
-            <>
+            <div className={css.authBtn}>
               <NavLink to='/register' className={css.links}>Register</NavLink>
               <NavLink to='/login' className={css.links}>Login</NavLink>
-            </>
+            </div>
           )}
-        </div>
+        
       </div>
     </header>
   );
