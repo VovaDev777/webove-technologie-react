@@ -34,6 +34,8 @@
 }
 .cardsCon {
     padding-bottom: 120px;
+    /* padding-right: 156px;
+    padding-left: 156px; */
 }
 .cardsList {
   display: flex;
