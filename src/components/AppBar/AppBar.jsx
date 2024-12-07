@@ -47,7 +47,7 @@ const AppBar = () => {
           {isAuthenticated ? (
             <div className={css.authBtn}> 
               <NavLink to='/allUsers' className={css.links}>All users</NavLink>
-              <button onClick={logout} className={css.links}>Logout</button>
+              <button onClick={logout} className={css.logoutBtn}>Logout</button>
             </div>
           ) : (
             <div className={css.authBtn}>

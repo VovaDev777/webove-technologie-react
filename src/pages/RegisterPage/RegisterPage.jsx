@@ -229,7 +229,7 @@ const StyledWrapper = styled.div`
   .form {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 200px;
     gap: 10px;
     background-color: #ffffff;
     padding: 30px;
@@ -315,6 +315,21 @@ const StyledWrapper = styled.div`
     border-radius: 10px;
     resize: none;
   }
+  @media screen and (min-width: 428px) and (max-width: 768px){
+  .form {
+  margin-top: 200px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1158px){
+  .form {
+  margin-top: 200px;
+  }
+}
+
+@media screen and (min-width: 1158px) {
+
+}
 `;
 
 
