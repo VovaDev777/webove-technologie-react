@@ -26,6 +26,12 @@
     width: 264px;
 
 }
+.gdpr {
+    color: #F4F4FD;
+}
+.privacyCon {
+    margin-top: 20px;
+}
 
 @media screen and (min-width: 428px) and (max-width: 768px){
     .footerCon {

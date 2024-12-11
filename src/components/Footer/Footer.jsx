@@ -15,6 +15,9 @@ const Footer = () => {
           digital marketing & growth solutions.
         </p>
       </div>
+      <div className={css.privacyCon}>
+      <a href='https://eur-lex.europa.eu/legal-content/SK/TXT/HTML/?uri=CELEX:32016R0679' target="_blank" className={css.gdpr}> Privacy Policy</a>
+      </div>
     </footer>
   );
 };
