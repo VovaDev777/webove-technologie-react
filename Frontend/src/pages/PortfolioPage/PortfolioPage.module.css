@@ -1,0 +1,145 @@
+.btnCon {
+  padding-top: 96px;
+  padding-bottom: 72px;
+}
+.filterBtn {
+  color: #4d5ae5;
+  font-size: 16px;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  padding: 12px 24px;
+  border-radius: 4px;
+  border: 1px solid var(--cornflower, #e7e9fc);
+  background: #f4f4fd;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.filterBtn:hover,
+.filterBtn:focus {
+  color: #ffffff;
+  background-color: #404bbf;
+  cursor: pointer;
+  border: 1px solid transparent;
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.08),
+    0px 2px 2px rgba(0, 0, 0, 0.12);
+}
+.btnList {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+.cardsCon {
+    padding-bottom: 120px;
+    padding-right: 120px;
+    padding-left: 120px;
+}
+.cardsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px 24px;
+  justify-content: center;
+}
+.cardsListItemTitle {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: #2e2f42;
+  margin-bottom: 8px;
+  margin-left: 16px;
+}
+.cardsListItemDesc {
+  color: #434455;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  margin-bottom: 32px;
+  margin-left: 16px;
+}
+.cardsListItem:hover {
+  box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
+    0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+.cardsListItem:focus {
+  box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
+    0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+.cardsListItem {
+    border-radius: 20px;
+    cursor: pointer;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cardsListItemImg {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  margin-bottom: 32px;
+}
+
+
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  position: relative;
+  max-width: 500px;
+  width: 90%;
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modalImg {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.modalTitle {
+  margin: 20px 0 10px;
+  font-size: 24px;
+}
+
+.modalDetail {
+  font-size: 16px;
+  color: #555;
+}
+
+@media screen and (min-width: 428px) and (max-width: 768px){
+  .btnList {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1158px){
+  .btnList {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 1158px) {
+
+}

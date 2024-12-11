@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 // Разрешить CORS
 app.use(
   cors({
-    origin: 'http://localhost:5173', // Укажите точный адрес фронтенда
-    credentials: true, // Разрешить передачу cookie
+    origin: 'http://localhost:5173',
+    credentials: true,
   })
 );
 app.use(cookieParser()); 

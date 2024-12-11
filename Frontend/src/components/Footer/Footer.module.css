@@ -1,0 +1,50 @@
+.logoLink {
+    text-decoration: none;
+}
+.logo {
+    font-family: Raleway;
+    font-size: 18px;
+    font-weight: 800;
+    margin-right: 72px;
+    color: #F4F4FD;
+}
+.firstLogoWord {
+    color: #4D5AE5;
+    margin-right: 1.5px;
+}
+.footerText {
+    color: #F4F4FD; 
+    margin-top: 16px;
+}
+.footerCon {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-color: #2E2F42;
+    padding-left: 156px;
+}
+.footerLogoCon {
+    width: 264px;
+
+}
+.gdpr {
+    color: #F4F4FD;
+}
+.privacyCon {
+    margin-top: 20px;
+}
+
+@media screen and (min-width: 428px) and (max-width: 768px){
+    .footerCon {
+        padding-left: 30px;
+    }
+  }
+  
+  @media screen and (min-width: 768px) and (max-width: 1158px){
+    .footerCon {
+        padding-left: 30px;
+    }
+  }
+  
+  @media screen and (min-width: 1158px) {
+  
+  }
