@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Popup from '../../components/Popup';
 import { useNavigate } from 'react-router-dom';
-import css from './RegisterPage.module.css'
+
 const countries = [
   'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia',
   'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium',
@@ -28,6 +28,7 @@ const countries = [
   'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America',
   'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'
 ];
+
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -40,10 +41,8 @@ const RegisterPage = () => {
     notes: '',
   });
 
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [popup, setPopup] = useState({ message: '', type: '' });
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,15 +64,15 @@ const RegisterPage = () => {
       if (!response.ok) throw new Error(data.error || 'Registration failed');
       setPopup({ message: 'Registration successful!', type: 'success' });
       setTimeout(() => {
-        navigate('/login'); // Переход на страницу логина
-      }, 3000); // Задержка в 3 секунды перед редиректом
+        navigate('/login');
+      }, 3000);
     } catch (error) {
       setPopup({ message: error.message, type: 'error' });
     }
   };
 
   return (
-    <StyledWrapper>
+    <PageWrapper>
       {popup.message && (
         <Popup
           message={popup.message}
@@ -81,257 +80,177 @@ const RegisterPage = () => {
           onClose={() => setPopup({ message: '', type: '' })}
         />
       )}
-      
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="flex-column">
-          <label>Name</label>
-        </div>
-        <div className="inputForm">
-          <input
-            type="text"
-            name="name"
-            className="input"
-            placeholder="Enter your Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
 
-        <div className="flex-column">
-          <label>Year of Birth</label>
-        </div>
-        <div className="inputForm">
-          <input
-            type="number"
-            name="yearOfBirth"
-            className="input"
-            placeholder="Enter your Year of Birth"
-            value={formData.yearOfBirth}
-            onChange={handleChange}
-            min="1900"
-            max={new Date().getFullYear()}
-            required
-          />
-        </div>
+      <FormWrapper>
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="flex-column">
+            <label>Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="flex-column">
-  <label>Country</label>
-</div>
-<div className="inputForm">
-  <input
-    type="text"
-    list="countries"
-    name="country"
-    className="input"
-    placeholder="Start typing or select a country"
-    value={formData.country}
-    onChange={handleChange}
-    required
-  />
-  <datalist id="countries">
-    {countries.map((country) => (
-      <option key={country} value={country} />
-    ))}
-  </datalist>
-</div>
+          <div className="flex-column">
+            <label>Year of Birth</label>
+            <input
+              type="number"
+              name="yearOfBirth"
+              placeholder="Enter your Year of Birth"
+              value={formData.yearOfBirth}
+              onChange={handleChange}
+              min="1900"
+              max={new Date().getFullYear()}
+              required
+            />
+          </div>
 
-        <div className="flex-column">
-          <label>Email</label>
-        </div>
-        <div className="inputForm">
-          <input
-            type="email"
-            name="email"
-            className="input"
-            placeholder="Enter your Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="flex-column">
+            <label>Country</label>
+            <input
+              type="text"
+              list="countries"
+              name="country"
+              placeholder="Start typing or select a country"
+              value={formData.country}
+              onChange={handleChange}
+              required
+            />
+            <datalist id="countries">
+              {countries.map((country) => (
+                <option key={country} value={country} />
+              ))}
+            </datalist>
+          </div>
 
-        <div className="flex-column">
-          <label>Password</label>
-        </div>
-        <div className="inputForm">
-          <input
-            type="password"
-            name="password"
-            className="input"
-            placeholder="Enter your Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="flex-column">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="flex-column">
-          <label>Confirm Password</label>
-        </div>
-        <div className="inputForm">
-          <input
-            type="password"
-            name="confirmPassword"
-            className="input"
-            placeholder="Confirm your Password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="flex-column">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="flex-column">
-          <label>Phone</label>
-        </div>
-        <div className="inputForm">
-          <input
-            type="text"
-            name="phone"
-            className="input"
-            placeholder="Enter your Phone"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-        </div>
+          <div className="flex-column">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm your Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="flex-column">
-          <label>Notes</label>
-        </div>
-        <div className="inputForm">
-          <textarea
-            name="notes"
-            className="input"
-            placeholder="Enter additional notes"
-            value={formData.notes}
-            onChange={handleChange}
-            rows="3"
-          />
-        </div>
+          <div className="flex-column">
+            <label>Phone</label>
+            <input
+              type="text"
+              name="phone"
+              placeholder="Enter your Phone"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+          </div>
 
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
+          <div className="flex-column">
+            <label>Notes</label>
+            <textarea
+              name="notes"
+              placeholder="Enter additional notes"
+              value={formData.notes}
+              onChange={handleChange}
+              rows="3"
+            />
+          </div>
 
-        <button className="button-submit" type="submit">
-          Register
-        </button>
-      </form>
-    </StyledWrapper>
+          <button className="button-submit" type="submit">
+            Register
+          </button>
+        </form>
+      </FormWrapper>
+    </PageWrapper>
   );
 };
 
-const StyledWrapper = styled.div`
+const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+  padding: 20px;
+  overflow-y: auto;
+`;
+
+const FormWrapper = styled.div`
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
   .form {
     display: flex;
     flex-direction: column;
-    margin-top: 200px;
-    gap: 10px;
-    background-color: #ffffff;
-    padding: 30px;
-    width: 450px;
-    border-radius: 20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    gap: 15px;
   }
 
-  .flex-column > label {
-    color: #151717;
-    font-weight: 600;
-  }
-
-  .inputForm {
-    position: relative;
-    border: 1.5px solid #ecedec; /* Default border color */
-    border-radius: 10px;
-    height: 50px;
+  .flex-column {
     display: flex;
-    align-items: center;
-    padding-left: 10px;
-    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    flex-direction: column;
+    gap: 5px;
   }
 
-  .inputForm:focus-within {
-    border-color: #2d79f3; /* Highlighted border color */
-    box-shadow: 0 0 4px rgba(45, 121, 243, 0.4); /* Subtle blue shadow */
-  }
-
-  .input {
-    margin-left: 10px;
-    border-radius: 10px;
-    border: none; /* Remove default input border */
+  input, textarea {
     width: 100%;
-    height: 100%;
-    padding: 0 10px;
-    font-size: 14px;
-    font-family: inherit;
-    outline: none; /* Prevent focus outline */
-    color: #151717;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
   }
 
-  .input::placeholder {
-    color: #a8a8a8; /* Placeholder color */
-    font-size: 14px;
-  }
-
-  .input:focus {
-    outline: none; /* Prevent double outline */
+  input:focus, textarea:focus {
+    border-color: #2575fc;
+    outline: none;
+    box-shadow: 0 0 4px rgba(37, 117, 252, 0.5);
   }
 
   .button-submit {
-    margin: 20px 0 10px 0;
-    background-color: #151717;
-    border: none;
+    background-color: #2575fc;
     color: white;
-    font-size: 15px;
-    font-weight: 500;
-    border-radius: 10px;
-    height: 50px;
-    width: 100%;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
   }
 
   .button-submit:hover {
-    background-color: #252727;
+    background-color: #1e63d0;
   }
-
-  .error {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-
-  .success {
-    color: green;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-
-  textarea.input {
-    font-size: 14px;
-    border-radius: 10px;
-    resize: none;
-  }
-  @media screen and (min-width: 428px) and (max-width: 768px){
-  .form {
-  margin-top: 200px;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1158px){
-  .form {
-  margin-top: 200px;
-  }
-}
-
-@media screen and (min-width: 1158px) {
-
-}
 `;
-
-
 
 export default RegisterPage;

@@ -7,10 +7,10 @@ import xss from 'xss';
 const router = Router();
 
 // Регулярные выражения для проверки данных
-const nameRegex = /^[A-Za-zÀ-ž\s]+$/;
+const nameRegex = /^[A-Za-z\s]+$/; // Только латинские буквы и пробелы
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const yearRegex = /^\d{4}$/;
-const phoneRegex = /^\+?\d{9,15}$/; // Поддержка телефонных номеров (например, +421987654321)
+const phoneRegex = /^\+?\d{9,15}$/;
 const passwordRegex = /^(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
 const countries = [
   'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia',
