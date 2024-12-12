@@ -36,7 +36,7 @@
 
 1. Navigate to the backend folder:
    ```bash
-   cd server
+   cd Backend
    ```
 
 2. Install backend dependencies:
@@ -46,7 +46,7 @@
 
 3. Start the backend server:
    ```bash
-   npm run start
+   node app.js
    ```
 
 4. The backend server will run on:
@@ -60,7 +60,7 @@
 
 1. Navigate to the frontend folder:
    ```bash
-   cd client
+   cd Frontend
    ```
 
 2. Install frontend dependencies:
