@@ -100,6 +100,91 @@
 .teamMemberRole {
   margin-bottom: 32px;
 }
+@media screen and (max-width: 428px) {
+  .hero {
+    padding: 60px 16px;
+  }
+
+  .heroText {
+    font-size: 24px;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .heroBtn {
+    width: 100%;
+    max-width: 200px;
+    font-size: 14px;
+  }
+
+  .skillsCon {
+    padding: 60px 16px;
+  }
+
+  .skillsList {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .skillsListItem {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .skillsTitle {
+    font-size: 18px;
+  }
+
+  .skillsText {
+    font-size: 14px;
+  }
+
+  .doingTitle {
+    font-size: 28px;
+  }
+
+  .doingList {
+    flex-direction: column;
+    padding: 40px 0;
+    gap: 16px;
+  }
+
+  .doingItem {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .teamCon {
+    padding: 60px 16px;
+  }
+
+  .teamTitle {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .teamList {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .teamListItem {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .teamMemberName {
+    font-size: 16px;
+    margin-top: 16px;
+  }
+
+  .teamMemberRole {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+}
 
 
 @media screen and (min-width: 428px) and (max-width: 768px){

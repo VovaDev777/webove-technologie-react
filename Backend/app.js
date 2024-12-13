@@ -11,7 +11,7 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 
-// Разрешить CORS
+// CORS
 app.use(
   cors({
     origin: 'http://localhost:5173',
@@ -20,12 +20,12 @@ app.use(
 );
 app.use(cookieParser()); 
 
-// Роуты
+// Routes
 app.use('/api/people', peopleRoutes);
 app.use('/api/login', loginRoutes);
 app.use('/api/auth', authRoutes);
 
-// Запуск сервера
+
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

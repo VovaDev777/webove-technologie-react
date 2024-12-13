@@ -103,7 +103,7 @@ const RegisterPage = () => {
               placeholder="Enter your Year of Birth"
               value={formData.yearOfBirth}
               onChange={handleChange}
-              min="1900"
+              min="1924"
               max={new Date().getFullYear()}
               required
             />

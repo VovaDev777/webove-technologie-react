@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import bcrypt from 'bcrypt'; // Для сравнения паролей
+import bcrypt from 'bcrypt';
 import db from '../config/database.js';
 
 const router = Router();
 
-// Регулярное выражение для проверки email
+
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Эндпоинт для логина
+// for login
 router.post('/login', async (req, res) => {
   const { Email, Password } = req.body;
 

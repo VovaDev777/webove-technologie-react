@@ -96,11 +96,13 @@
 
 .modalContent {
   background: white;
-  padding: 40px;
-  border-radius: 8px;
+  padding: 20px;
+  border-radius: 12px;
   position: relative;
-  max-width: 500px;
-  width: 90%;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .modalCloseBtn {
@@ -127,6 +129,89 @@
   font-size: 16px;
   color: #555;
 }
+@media screen and (max-width: 428px) {
+  .btnCon {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .btnList {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .filterBtn {
+    font-size: 14px;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+  }
+
+  .cardsCon {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 80px;
+  }
+
+  .cardsList {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cardsListItem {
+    border-radius: 16px;
+    margin: 0 auto;
+    max-width: 320px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .cardsListItemImg {
+    border-radius: 16px;
+    margin-bottom: 12px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .cardsListItemTitle {
+    font-size: 16px;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .cardsListItemDesc {
+    font-size: 14px;
+    margin-left: 0;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .modalOverlay {
+    padding: 16px;
+  }
+
+  .modalContent {
+
+    max-width: 90%;
+    border-radius: 12px;
+  }
+
+  .modalTitle {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .modalDetail {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .modalCloseBtn {
+    font-size: 18px;
+  }
+}
+
 
 @media screen and (min-width: 428px) and (max-width: 768px){
   .btnList {

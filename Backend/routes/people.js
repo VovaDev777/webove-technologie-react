@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import bcrypt from 'bcrypt'; // Для хеширования паролей
+import bcrypt from 'bcrypt';
 import db from '../config/database.js';
 import xss from 'xss';
 
 
 const router = Router();
 
-// Регулярные выражения для проверки данных
-const nameRegex = /^[A-Za-z\s]+$/; // Только латинские буквы и пробелы
+
+const nameRegex = /^[A-Za-z\s]+$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const yearRegex = /^\d{4}$/;
 const phoneRegex = /^\+?\d{9,15}$/;
@@ -38,7 +38,6 @@ const countries = [
   'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'
 ];
 
-// Добавление записи в таблицу People
 router.post('/add', async (req, res) => {
   let { name, yearOfBirth, country, email, password, phone, notes } = req.body;
   name = xss(name);
@@ -53,39 +52,39 @@ router.post('/add', async (req, res) => {
 
   console.log('Received data:', req.body);
 
-  // Валидация обязательных полей
+  // validation required fields
   if (!name || !yearOfBirth || !country || !email || !password) {
     console.log('Validation failed: Missing required fields');
     return res.status(400).json({ error: 'All required fields must be filled.' });
   }
 
-  // Проверка списка стран
+  // validation country
   if (!countries.includes(country)) {
     console.log('Validation failed: Country not in the list');
     return res.status(400).json({ error: 'Country must be selected from the predefined list.' });
   }
 
-  // Валидация имени
+  // validation name
   if (!nameRegex.test(name)) {
     console.log('Validation failed: Invalid name format');
     return res.status(400).json({ error: 'Name must contain only letters and spaces.' });
   }
 
-  // Валидация года рождения
+  // validation year
   if (!yearRegex.test(yearOfBirth) || yearOfBirth < 1900 || yearOfBirth > new Date().getFullYear()) {
     console.log('Validation failed: Invalid year format');
     return res.status(400).json({
-      error: `Year of birth must be a valid year between 1900 and ${new Date().getFullYear()}.`,
+      error: `Year of birth must be a valid year between 1924 and ${new Date().getFullYear()}.`,
     });
   }
 
-  // Валидация email
+  // validation email
   if (!emailRegex.test(email)) {
     console.log('Validation failed: Invalid email format');
     return res.status(400).json({ error: 'Email must be a valid email address.' });
   }
 
-  // Валидация телефона
+  // validation phone
   if (phone && !phoneRegex.test(phone)) {
     console.log('Validation failed: Invalid phone format');
     return res.status(400).json({
@@ -93,7 +92,7 @@ router.post('/add', async (req, res) => {
     });
   }
 
-  // Валидация пароля
+  // validation password
   if (!passwordRegex.test(password)) {
     console.log('Validation failed: Weak password');
     return res.status(400).json({
@@ -102,10 +101,10 @@ router.post('/add', async (req, res) => {
   }
 
   try {
-    // Хеширование пароля
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // SQL-запрос для вставки
+
     const query = `
       INSERT INTO People (name, yearOfBirth, country, email, password, phone, notes)
       VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -116,7 +115,7 @@ router.post('/add', async (req, res) => {
     db.query(query, [name, yearOfBirth, country, email, hashedPassword, phone || null, notes || null], (error, results) => {
       if (error) {
         console.error('Error inserting data into People:', error);
-        return res.status(500).json({ error: 'Database error.' });
+        return res.status(500).json({ error: error.sqlMessage });
       }
 
       console.log('Insert successful:', results);
@@ -133,7 +132,7 @@ router.get('/all', async (req, res) => {
   let query = 'SELECT Id, name, yearOfBirth, country, email, phone, notes FROM People WHERE 1=1';
   const params = [];
 
-  // Фильтрация
+  // filtering
   if (name) {
     query += ' AND name LIKE ?';
     params.push(`%${name}%`);
@@ -151,7 +150,7 @@ router.get('/all', async (req, res) => {
     params.push(yearOfBirth);
   }
 
-  // Сортировка
+  // sorting
   if (sortField && sortOrder) {
     query += ` ORDER BY ${sortField} ${sortOrder.toUpperCase() === 'DESC' ? 'DESC' : 'ASC'}`;
   }
@@ -163,7 +162,7 @@ router.get('/all', async (req, res) => {
         return res.status(500).json({ error: 'Database error.' });
       }
 
-      // Очищаем данные перед отправкой клиенту
+      // cleaning data before sending to client
       const sanitizedResults = results.map((user) => ({
         id: xss(user.Id),
         name: xss(user.name),
@@ -182,7 +181,7 @@ router.get('/all', async (req, res) => {
   }
 });
 
-// Эндпоинт для удаления пользователей
+// deleting users
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
 
@@ -206,8 +205,8 @@ router.delete('/:id', async (req, res) => {
   }
 });
 router.put('/update', async (req, res) => {
-  const { id, name, email, phone, notes } = req.body; // Поля, которые можно обновлять
-  const userId = req.userId; // Получение идентификатора текущего пользователя из middleware
+  const { id, name, email, phone, notes } = req.body;
+  const userId = req.userId;
 
   console.log('Update request by user:', userId);
 
@@ -215,7 +214,7 @@ router.put('/update', async (req, res) => {
     return res.status(403).json({ error: 'You can only update your own data.' });
   }
 
-  // Валидация данных
+  // validation
   if (name && !nameRegex.test(name)) {
     return res.status(400).json({ error: 'Name must contain only letters and spaces.' });
   }
@@ -228,7 +227,7 @@ router.put('/update', async (req, res) => {
     return res.status(400).json({ error: 'Phone number must be valid and contain 9 to 15 digits.' });
   }
 
-  // SQL-запрос для обновления данных
+  // SQL-request to refreshing data
   try {
     const query = `
       UPDATE People

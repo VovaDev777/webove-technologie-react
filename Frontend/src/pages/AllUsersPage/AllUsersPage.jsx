@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import DOMPurify from 'dompurify'; // Для защиты от XSS
@@ -84,69 +84,72 @@ const AllUsersPage = () => {
   };
 
   return (
-    <StyledWrapper>
-      <h1>All Users</h1>
-      {error && <p className="error">{error}</p>}
-      <div className="filters">
-        <input
-          type="text"
-          name="name"
-          placeholder="Filter by name"
-          value={filters.name}
-          onChange={handleFilterChange}
-        />
-        <input
-          type="text"
-          name="country"
-          placeholder="Filter by country"
-          value={filters.country}
-          onChange={handleFilterChange}
-        />
-        <input
-          type="text"
-          name="email"
-          placeholder="Filter by email"
-          value={filters.email}
-          onChange={handleFilterChange}
-        />
-        <input
-          type="number"
-          name="yearOfBirth"
-          placeholder="Filter by year of birth"
-          value={filters.yearOfBirth}
-          onChange={handleFilterChange}
-        />
-      </div>
-      {users.length > 0 ? (
-        <table>
-          <thead>
-            <tr>
-              {Object.keys(users[0]).map((key) => (
-                <th key={key} onClick={() => handleSort(key)}>
-                  {key} {sort.field === key ? (sort.order === 'asc' ? '↑' : '↓') : ''}
-                </th>
-              ))}
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                {Object.values(user).map((value, idx) => (
-                  <td key={idx} dangerouslySetInnerHTML={{ __html: value }} />
+      <StyledWrapper>
+        <h1>All Users</h1>
+        {error && <p className="error">{error}</p>}
+        <div className="filters">
+          <input
+              type="text"
+              name="name"
+              placeholder="Filter by name"
+              value={filters.name}
+              onChange={handleFilterChange}
+          />
+          <input
+              type="text"
+              name="country"
+              placeholder="Filter by country"
+              value={filters.country}
+              onChange={handleFilterChange}
+          />
+          <input
+              type="text"
+              name="email"
+              placeholder="Filter by email"
+              value={filters.email}
+              onChange={handleFilterChange}
+          />
+          <input
+              type="number"
+              name="yearOfBirth"
+              placeholder="Filter by year of birth"
+              value={filters.yearOfBirth}
+              onChange={handleFilterChange}
+          />
+        </div>
+        {users.length > 0 ? (
+            <div className="table-container">
+              <table>
+                <thead>
+                <tr>
+                  {Object.keys(users[0]).map((key) => (
+                      <th key={key} onClick={() => handleSort(key)}>
+                        {key} {sort.field === key ? (sort.order === 'asc' ? '↑' : '↓') : ''}
+                      </th>
+                  ))}
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {users.map((user) => (
+                    <tr key={user.id}>
+                      {Object.values(user).map((value, idx) => (
+                          <td key={idx} dangerouslySetInnerHTML={{ __html: value }} />
+                      ))}
+                      <td>
+                        <button onClick={() => handleDelete(user.id)}>Delete</button>
+                      </td>
+                    </tr>
                 ))}
-                <td>
-                  <button onClick={() => handleDelete(user.id)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>No users found.</p>
-      )}
-    </StyledWrapper>
+                </tbody>
+              </table>
+            </div>
+        ) : (
+            <p>No users found.</p>
+        )}
+      </StyledWrapper>
   );
+
 };
 
 const StyledWrapper = styled.div`
@@ -183,11 +186,17 @@ const StyledWrapper = styled.div`
     }
   }
 
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
+    min-width: 800px; /* Минимальная ширина таблицы */
 
     th,
     td {
@@ -230,5 +239,6 @@ const StyledWrapper = styled.div`
     margin-top: 20px;
   }
 `;
+
 
 export default AllUsersPage;
