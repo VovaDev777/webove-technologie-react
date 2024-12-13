@@ -23,8 +23,8 @@
    - **Hostname**: Enter `147.232.47.244`.
    - **Username**: Enter `Poiasnik`.
    - **Password**:
-     1. Click on the **Store in Vault** button.
-     2. Enter the password: `408382838`.
+      1. Click on the **Store in Vault** button.
+      2. Enter the password: `408382838`.
 
 5. **Test the Connection**:
    - Click the **Test Connection** button.
@@ -32,49 +32,40 @@
 
 ---
 
-## Running the Backend
+## Running the Project
 
-1. Navigate to the backend folder:
+1. Navigate to the root project folder:
    ```bash
-   cd Backend
+   cd webove-technologie-react
    ```
 
-2. Install backend dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the backend server:
-   ```bash
-   node app.js
-   ```
-
-4. The backend server will run on:
-   ```
-   http://localhost:5001
-   ```
-
----
-
-## Running the Frontend
-
-1. Navigate to the frontend folder:
-   ```bash
-   cd Frontend
-   ```
-
-2. Install frontend dependencies:
+2. Install all dependencies:
    ```bash
    npm install
    ```
 
-3. Start the frontend development server:
-   ```bash
-   npm run dev
-   ```
+3. Start the Frontend:
+   - Navigate to the frontend folder:
+     ```bash
+     cd Frontend
+     ```
+   - Start the development server:
+     ```bash
+     npm run dev
+     ```
 
-4. The frontend will be available at:
-   ```
+4. Start the Backend:
+   - Navigate to the backend folder:
+     ```bash
+     cd Backend
+     ```
+   - Start the backend server:
+     ```bash
+     node app.js
+     ```
+
+5. The application will be available at:
+   ```bash
    http://localhost:5173
    ```
 
