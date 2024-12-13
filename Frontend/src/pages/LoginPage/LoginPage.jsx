@@ -11,7 +11,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const { login } = useAuth(); // Доступ к функции login
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +52,7 @@ const LoginPage = () => {
       window.dispatchEvent(new Event('storage'));
 
       setSuccess(data.message);
-      navigate('/'); // Перенаправляем пользователя после успешного логина
+      navigate('/');
     } catch (error) {
       console.error('[CLIENT] Failed to connect to the server:', error);
       setError('Failed to connect to the server.');
